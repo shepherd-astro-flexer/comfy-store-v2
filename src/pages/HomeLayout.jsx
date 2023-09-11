@@ -1,5 +1,5 @@
 import { Outlet, useNavigation } from "react-router-dom";
-import { Navbar } from "../components";
+import { Navbar, Header } from "../components";
 
 const HomeLayout = () => {
   const navigation = useNavigation();
@@ -7,9 +7,12 @@ const HomeLayout = () => {
 
   return (
     <div>
+      <Header />
       <Navbar />
       {isLoading ? (
-        <h3>Loading...</h3>
+        <section className="grid place-items-center h-screen">
+          <span className="loading loading-spinner loading-lg"></span>
+        </section>
       ) : (
         <section className="align-element py-20">
           <Outlet />
