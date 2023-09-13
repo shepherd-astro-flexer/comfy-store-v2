@@ -14,9 +14,13 @@ import {
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { loader as landingLoader } from "./pages/Landing"; 
 import { ErrorElement } from "./components";
-
+import { store } from "./store";
+import { Provider } from "react-redux";
+// import loaders
+import { loader as landingLoader } from "./pages/Landing";
+import { loader as singleProductLoader } from "./pages/SingleProduct";
+import { ToastContainer } from "react-toastify";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,8 +39,8 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Landing />,
-        errorElement: <ErrorElement/>,
-        loader: landingLoader(queryClient)
+        errorElement: <ErrorElement />,
+        loader: landingLoader(queryClient),
       },
       {
         path: "about",
@@ -49,6 +53,8 @@ const router = createBrowserRouter([
       {
         path: "products/:id",
         element: <SingleProduct />,
+        errorElement: <ErrorElement />,
+        loader: singleProductLoader(queryClient),
       },
       {
         path: "cart",
@@ -78,10 +84,13 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <ReactQueryDevtools/>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools />
+        <ToastContainer position="top-center"/>
+      </QueryClientProvider>
+    </Provider>
   );
 };
 export default App;
