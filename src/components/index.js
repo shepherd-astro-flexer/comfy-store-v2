@@ -9,6 +9,8 @@ export {default as ErrorElement} from "./ErrorElement"
 export {default as SectionTitle} from "./SectionTitle"
 export {default as Navigations} from "./Navigations"
 export {default as SingleProductDetails} from "./SingleProductDetails"
+export {default as Filters} from "./Filters"
+
 
 
 

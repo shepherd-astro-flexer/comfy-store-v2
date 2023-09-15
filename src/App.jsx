@@ -17,10 +17,15 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ErrorElement } from "./components";
 import { store } from "./store";
 import { Provider } from "react-redux";
-// import loaders
+import { ToastContainer } from "react-toastify";
+
+// loaders
 import { loader as landingLoader } from "./pages/Landing";
 import { loader as singleProductLoader } from "./pages/SingleProduct";
-import { ToastContainer } from "react-toastify";
+import { loader as productsLoader } from "./pages/Products";
+
+// actions
+// import { action as productsAction } from "./pages/Products";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,6 +54,9 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+        loader: productsLoader(queryClient),
+        // action: productsAction,
+        errorElement: <ErrorElement />
       },
       {
         path: "products/:id",

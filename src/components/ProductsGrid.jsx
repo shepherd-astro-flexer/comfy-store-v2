@@ -3,6 +3,13 @@ import { formatPrice } from "../utils";
 
 const ProductsGrid = ({ products }) => {
 // * by default grid is one column, so we can just omit it
+
+  if (products.length < 1) {
+    return <div className="pt-16">
+      <h2 className="text-2xl">Sorry, no products matched your search...</h2>
+    </div>
+  }
+
   return (
     <div className="pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {products.map(({ id, attributes }) => {

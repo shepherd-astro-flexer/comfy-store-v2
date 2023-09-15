@@ -11,3 +11,14 @@ export const formatPrice = (price) => {
     }).format((price/100).toFixed(2));
     return dollarsAmount
 }
+
+export const optionsArray = (num) => {
+    return Array.from({length: num}, (_, idx) => {
+        const value = idx + 1;
+
+        return <option key={value}>{value}</option>
+    })
+}
+
+
+   

@@ -2,7 +2,8 @@ import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { addCartItem } from "../features/cart/cartSlice";
 import { toast } from "react-toastify";
-
+import { optionsArray } from "../utils";
+ 
 const AddToCart = ({id, attributes}) => {
     const { title, company, price, colors, image } =
     attributes;
@@ -10,7 +11,6 @@ const AddToCart = ({id, attributes}) => {
 
     const [mainColor, setMainColor] = useState(colors[0]);
     const [amount, setAmount] = useState(1)
-    const amountArray = Array.from({length: 20}, (_, idx) => idx+1)
 
     const cartItem = {
         cartItemId: id + mainColor,
@@ -38,12 +38,11 @@ const AddToCart = ({id, attributes}) => {
         {/* amount */}
         <div className="flex flex-col">
             <label htmlFor="select" className="py-2 px-1 text-md font-semibold tracking-tighter">Amount</label>
-            <select id="select" className="bg-[#272935] h-12 w-80 border-secondary border-x border-y rounded-md focus:outline-none focus:ring-1 focus:ring-secondary" value={amount} onChange={(e) => setAmount(parseInt(e.target.value))}>
-                {amountArray.map(amount => <option key={amount}>{amount}</option>)}
+            <select id="select" className="select bg-[#272935] h-12 w-80 border-secondary border-x border-y rounded-md focus:outline-none focus:ring-1 focus:ring-secondary" value={amount} onChange={(e) => setAmount(parseInt(e.target.value))}>
+                {optionsArray(20)}
             </select>
         </div>
         {/* add to cart button */}
-
         <button className="mt-12 btn btn-secondary" onClick={() => {
             dispatch(addCartItem(cartItem))
             toast.success("Item added to cart")
