@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Form, Link } from "react-router-dom"
 import { formatPrice } from "../utils";
-import { changePrice } from "../features/filter/filterSlice";
+import { changePrice, resetPrice } from "../features/filter/filterSlice";
 
 const Filters = ({products, meta, searchObj}) => {
     const {min, max, filters: {price}} = useSelector((store) => store.filter)
@@ -10,7 +10,7 @@ const Filters = ({products, meta, searchObj}) => {
     const sortArray = ["a-z", "z-a", "high", "low"]
     
   return (
-    <Form className="grid gap-y-8 gap-x-4 bg-[#181920] px-8 py-5 rounded-md sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div className="grid gap-y-8 gap-x-4 bg-[#181920] px-8 py-5 rounded-md sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {/* search */}
         <div className="flex flex-col ">
             <label htmlFor="search" className="text-sm p-1">Search Product</label>
@@ -59,9 +59,9 @@ const Filters = ({products, meta, searchObj}) => {
         </div>
         {/* reset button */}
         <div className="flex place-items-center">
-            <Link to="/products" className="btn btn-block btn-sm bg-[#ffb261] text-gray-800">reset</Link>
+            <Link to="/products" className="btn btn-block btn-sm bg-[#ffb261] text-gray-800" onClick={() => dispatch(resetPrice())}>reset</Link>
         </div>
-    </Form>
+    </div>
   )
 }
 export default Filters

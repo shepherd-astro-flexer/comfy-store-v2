@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
 import { formatPrice } from "../utils";
+import { useState } from "react";
 
 const ProductsList = ({ products }) => {
+  const [imageScaleId, setImageScaleId] = useState(null)
+
+  const handleHover = (id) => {
+    setImageScaleId(id)
+  }
+
   if (products.length < 1) {
     return <div className="pt-16">
       <h2 className="text-2xl">Sorry, no products matched your search...</h2>
@@ -15,12 +22,14 @@ const ProductsList = ({ products }) => {
         return (
           <Link
             key={id}
+            onMouseOver={() => handleHover(id)}
+            onMouseOut={() => setImageScaleId(null)}
             className="flex flex-col gap-y-4 p-8 card-side rounded-lg w-full shadow-xl hover:shadow-2xl transition duration-300 sm:flex-row sm:justify-between"
             to={`/products/${id}`}
           >
-            <figure className="">
+            <figure className={`duration-300 ${imageScaleId === id && "scale-105"}`}>
               <img
-                className="h-24 w-24 rounded-lg object-cover ease-in-out sm:h-32 sm:w-32  duration-300 hover:scale-105"
+                className="h-24 w-24 rounded-lg object-cover sm:h-32 sm:w-32  "
                 src={image}
                 alt={title}
               />

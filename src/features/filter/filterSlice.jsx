@@ -26,9 +26,12 @@ const filterSlice = createSlice({
         getCartItems: (store, action) => {
             store.filtersCart = action.payload;
             store.allProductsCart = action.payload
+        },
+        resetPrice: (store) => {
+            store.filters.price = 100000
         }
     }
 })
 
-export const {changePrice, getCartItems} = filterSlice.actions
+export const {changePrice, getCartItems, resetPrice} = filterSlice.actions
 export default filterSlice.reducer;

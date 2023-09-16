@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query"
 import { Form, useLoaderData} from "react-router-dom"
 import { customFetch } from "../utils"
-import { Filters } from "../components"
-import { useEffect } from "react"
+import { Filters, Pagination } from "../components"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { getCartItems } from "../features/filter/filterSlice"
 import ProductsContent from "../components/ProductsContent"
+
 
 const fetchFeaturedQuery = (params) => {
  
@@ -36,38 +37,27 @@ export const loader = (queryClient) => async ({request}) => {
   if (url.searchParams.size >= 1) {
     searchObj = Object.fromEntries(search)
   }
-
+  // ! how do we append and remove params? is this the solution?
   await queryClient.ensureQueryData(fetchFeaturedQuery(searchObj))
   return searchObj
 }
 
 const Products = () => {
   const searchObj = useLoaderData()
-  
+
   const {data: {data: products, meta}} = useQuery(fetchFeaturedQuery(searchObj))
- 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCartItems(products))
   }, [products])
   // * pageArray
-  const pageCount = Array.from({length: meta.pagination.pageCount}, (_, idx) => {
-    const pageNum = idx + 1;
-    
-    return <button key={pageNum} className="join-item btn btn-md" name="page" value={pageNum}>{pageNum}</button>
-  })
+
   return (
-    <div>
+    <Form>
       <Filters products={products} meta={meta} searchObj={searchObj} />
       <ProductsContent products={products} meta={meta} />
-      <div>
-        {meta.pagination.pageCount > 1 && <Form className="join">
-          <button className="join-item btn btn-md">prev</button>
-            {pageCount}
-          <button className="join-item btn btn-md" >next</button>
-        </Form>}
-      </div>
-    </div>
+      <Pagination meta={meta} searchObj={searchObj}/>
+    </Form>
   )
 }
 
