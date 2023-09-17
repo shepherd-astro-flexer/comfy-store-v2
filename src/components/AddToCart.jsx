@@ -19,7 +19,8 @@ const AddToCart = ({id, attributes}) => {
         title,
         company,
         price,
-        image
+        image,
+        optionsAmount: amount + 5
     }
 
   return (

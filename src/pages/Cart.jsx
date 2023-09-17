@@ -1,10 +1,12 @@
-import { useSelector } from "react-redux"
+import { SectionTitle, CartsContainer, CheckoutTotals } from "../components";
 
 const Cart = () => {
-  const {cartItems} = useSelector((store) => store.cart)
-  console.log(cartItems);
   return (
-    <div>Cart</div>
+    <div>
+      <SectionTitle text={"shopping cart"}/>
+      <CartsContainer />
+      <CheckoutTotals />
+    </div>
   )
 }
 export default Cart

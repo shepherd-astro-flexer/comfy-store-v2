@@ -1,5 +1,5 @@
 import { Outlet, useNavigation } from "react-router-dom";
-import { Navbar, Header } from "../components";
+import { Navbar, Header, Loading } from "../components";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
@@ -17,9 +17,7 @@ const HomeLayout = () => {
       <Header />
       <Navbar />
       {isLoading ? (
-        <section className="grid place-items-center h-screen">
-          <span className="loading loading-spinner loading-lg"></span>
-        </section>
+        <Loading/>
       ) : (
         <section className="align-element py-20">
           <Outlet />

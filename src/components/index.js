@@ -11,6 +11,13 @@ export {default as Navigations} from "./Navigations"
 export {default as SingleProductDetails} from "./SingleProductDetails"
 export {default as Filters} from "./Filters"
 export {default as Pagination} from "./Pagination"
+export {default as Loading} from "./Loading"
+export {default as CartsContainer} from "./CartsContainer"
+export {default as CheckoutTotals} from "./CheckoutTotals"
+
+
+
+
 
 
 

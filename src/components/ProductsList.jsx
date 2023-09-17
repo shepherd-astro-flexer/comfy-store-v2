@@ -29,10 +29,10 @@ const ProductsList = ({ products }) => {
           >
             <figure className={`duration-300 ${imageScaleId === id && "scale-105"}`}>
               <img
-                className="h-24 w-24 rounded-lg object-cover sm:h-32 sm:w-32  "
+                className="h-24 w-24 rounded-lg objec   t-cover sm:h-32 sm:w-32  "
                 src={image}
                 alt={title}
-              />
+              />  
             </figure>
             <div className="card-side sm:grow sm:ml-16">
               <p className="card-side text-lg font-medium capitalize tracking-normal">
