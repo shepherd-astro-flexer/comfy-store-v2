@@ -1,11 +1,10 @@
-import { SectionTitle, CartsContainer, CheckoutTotals } from "../components";
+import { SectionTitle, CartsContainer} from "../components";
 
 const Cart = () => {
   return (
     <div>
       <SectionTitle text={"shopping cart"}/>
       <CartsContainer />
-      <CheckoutTotals />
     </div>
   )
 }
