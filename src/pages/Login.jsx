@@ -1,5 +1,21 @@
-import { Form, Link } from "react-router-dom";
+import { Form, Link, redirect, useActionData } from "react-router-dom";
 import { FormInput, SubmitBtn } from "../components";
+import { customFetch } from "../utils";
+import { toast } from "react-toastify";
+import { loginUser } from "../features/user/userSlice";
+
+export const action = (store) => async ({request}) => {
+  try {
+    const formData = Object.fromEntries(await request.formData())
+    const {data} = await customFetch.post("/auth/local", formData)
+    store.dispatch(loginUser({username: data.user.username}))
+    toast.success("Logged in successfully")
+    return redirect("/")
+  } catch (error) {
+    toast.warn(error.response.data.error.message)
+    return error
+  }
+}
 
 const Login = () => {
   return (

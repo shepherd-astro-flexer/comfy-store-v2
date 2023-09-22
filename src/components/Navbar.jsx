@@ -2,34 +2,16 @@ import { BsCart3, BsMoonFill, BsSunFill } from "react-icons/bs";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 import NavLinks from "./NavLinks";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-
-const themes = {
-  winter: "winter",
-  dracula: "dracula",
-};
-
-const getThemeFromLocalStorage = () => {
-  return localStorage.getItem("theme") || themes.winter;
-};
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../features/user/userSlice";
 
 const Navbar = () => {
   const {prices} = useSelector((store) => store.cart)
-  const [theme, setTheme] = useState(getThemeFromLocalStorage());
+
+  const dispatch = useDispatch()
   const handleTheme = () => {
-    const { winter, dracula } = themes;
-    const newTheme = theme === winter ? dracula : winter;
-
-    setTheme(newTheme);
+    dispatch(toggleTheme())
   };
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    // the value will be based on value of theme, so once we refresh the page, the component rerenders and sees the same value from before. That is why we need to create a condition on our state
-    // to check if there is a store value. If there isn't, then we want to assign a value that inside the themes object
-    localStorage.setItem("theme", theme);
-  }, [theme]);
 
   return (
     <nav className="bg-base-200">

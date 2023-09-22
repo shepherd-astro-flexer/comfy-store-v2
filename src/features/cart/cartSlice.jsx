@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify"
 
 const getCartItems = localStorage.getItem("cartItems")
@@ -12,18 +12,7 @@ const initialState = {
     tax: 0,
     orderTotal: 0
   }
-  
 };
-
-export const fetchCartItems = createAsyncThunk("cart/fetchCartItems", async (_, thunkAPI) => {
-  try {
-    const {data} = await customFetch("/cart")
-    return data
-  } catch (error) {
-    console.log(error);
-  }
-  
-})
 
 // ! remember that what we return inside of a reducer will be the NEW state, so if we return nothing, then that will be the new state value
 const cartSlice = createSlice({
@@ -75,14 +64,13 @@ const cartSlice = createSlice({
       store.prices.amount = amount;
       store.prices.tax = total / 10
       store.prices.orderTotal = store.prices.shipping + total + total / 10
+    },
+    clearCart: (store) => {
+      store.cartItems = []
+      localStorage.removeItem("cartItems");
     }
-  },
-  extraReducers: (store, action) => {
-    
-
-    return
   }
 });
 
-export const { addCartItem, removeCartItem, updateCartItemAmount, updateTotalAmount} = cartSlice.actions;
+export const { addCartItem, removeCartItem, updateCartItemAmount, updateTotalAmount, clearCart} = cartSlice.actions;
 export default cartSlice.reducer;

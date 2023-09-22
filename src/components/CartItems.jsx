@@ -1,21 +1,24 @@
-import { useDispatch, useSelector } from "react-redux"
-import { formatPrice } from "../utils"
-import { removeCartItem, updateCartItemAmount } from "../features/cart/cartSlice"
+import { useDispatch, useSelector } from "react-redux";
+import { formatPrice } from "../utils";
+import {
+  removeCartItem,
+  updateCartItemAmount,
+} from "../features/cart/cartSlice";
 
 const CartItems = () => {
-    const {cartItems} = useSelector((store) => store.cart) 
-    const dispatch = useDispatch()
-   
-    const handleRemove = (id) => {
-       dispatch(removeCartItem(id))
-    }
+  const { cartItems } = useSelector((store) => store.cart);
+  const dispatch = useDispatch();
 
-    const handleAmount = (id, amount) => {
-        dispatch(updateCartItemAmount({id, amount}))
-    }
+  const handleRemove = (id) => {
+    dispatch(removeCartItem(id));
+  };
+
+  const handleAmount = (id, amount) => {
+    dispatch(updateCartItemAmount({ id, amount }));
+  };
 
   return (
-    <div className="mb-12 grid gap-y-6 lg:basis-8/12">
+    <>
       {cartItems.map((cartItem) => {
         const {
           amount,
@@ -39,7 +42,7 @@ const CartItems = () => {
             key={cartItemId}
             className="flex flex-col gap-y-4 border-b first:pt-0 border-black py-6 sm:flex-row sm:justify-between last:border-none"
           >
-            <img
+            <img 
               className="h-24 w-24 rounded-md object-cover sm:h-32 sm:w-32"
               src={image}
               alt={title}
@@ -87,7 +90,7 @@ const CartItems = () => {
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
 export default CartItems;

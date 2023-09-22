@@ -25,6 +25,9 @@ import { loader as singleProductLoader } from "./pages/SingleProduct";
 import { loader as productsLoader } from "./pages/Products";
 
 // actions
+import { action as loginAction } from "./pages/Login";
+import { action as registerAction } from "./pages/Register";
+
 // import { action as productsAction } from "./pages/Products";
 
 const queryClient = new QueryClient({
@@ -80,11 +83,13 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
+    action: loginAction(store),
     element: <Login />,
     errorElement: <Error />,
   },
   {
     path: "/register",
+    action: registerAction,
     element: <Register />,
     errorElement: <Error />,
   },

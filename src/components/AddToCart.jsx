@@ -14,6 +14,7 @@ const AddToCart = ({id, attributes}) => {
 
     const cartItem = {
         cartItemId: id + mainColor,
+        productId: id,
         color: mainColor,
         amount,
         title,
