@@ -19,7 +19,8 @@ const userSlice = createSlice({
     initialState: defaultState,
     reducers: {
         loginUser: (state, action) => {
-            state.user = action.payload 
+            const {jwt, user} = action.payload
+            state.user = user
             localStorage.setItem("user", JSON.stringify(state.user))
         },
         logoutUser: (state) => {
