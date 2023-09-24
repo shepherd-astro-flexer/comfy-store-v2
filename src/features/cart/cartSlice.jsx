@@ -20,15 +20,14 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addCartItem: (store, action) => {
-      const { cartItemId, amount } = action.payload;
-      console.log(store.cartItems);
+      const { cartID, amount } = action.payload;
       const findCartItem = store.cartItems.find(
-        (product) => product.cartItemId === cartItemId
+        (product) => product.cartID === cartID
       );
 
       if (findCartItem) {
         store.cartItems = store.cartItems.map((product) => {
-          return product.cartItemId === cartItemId
+          return product.cartID === cartID
             ? { ...product, amount: product.amount + amount }
             : product;
         });
@@ -37,19 +36,19 @@ const cartSlice = createSlice({
       }
     },
     removeCartItem: (store, action) => {
-      const cartItemId = action.payload
+      const cartID = action.payload
 
       store.cartItems = store.cartItems.filter(item => {
-        return item.cartItemId !== cartItemId
+        return item.cartID !== cartID
       })
       toast.error("Item removed from cart")
     },
     updateCartItemAmount: (store, action) => {
       const {id, amount} = action.payload
-      console.log(amount);
+
       store.cartItems = store.cartItems.map(item => {
           
-        return id === item.cartItemId ? {...item, amount,  optionsAmount: amount + 5} : item
+        return id === item.cartID ? {...item, amount,  optionsAmount: amount + 5} : item
       })
       toast.success("Cart updated")
     },

@@ -7,17 +7,17 @@ const CheckoutTotals = () => {
   const { total, shipping, orderTotal, tax } = prices;
 
   return (
-    <>
-      <div className="card card-body text-xs mb-8 px-8 py-6 bg-[#181920]">
-        <div className="flex justify-between py-2 capitalize border-b border-black">
+    <div className="card bg-base-200">
+      <div className="card-body text-xs">
+        <div className="flex justify-between pb-2 capitalize border-b border-black">
           <span>subtotal</span>
           <span className="font-semibold">{formatPrice(total)}</span>
         </div>
-        <div className="flex justify-between py-2 capitalize border-b border-black">
+        <div className="flex justify-between pb-2 capitalize border-b border-black">
           <span>shipping</span>
           <span className="font-semibold">{formatPrice(shipping)}</span>
         </div>
-        <div className="flex justify-between py-2 capitalize border-b border-black">
+        <div className="flex justify-between pb-2 capitalize border-b border-black">
           <span>tax</span>
           <span className="font-semibold">{formatPrice(tax)}</span>
         </div>
@@ -26,7 +26,7 @@ const CheckoutTotals = () => {
           <span className="font-semibold">{formatPrice(orderTotal)}</span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default CheckoutTotals;

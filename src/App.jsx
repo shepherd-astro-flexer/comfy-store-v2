@@ -23,10 +23,13 @@ import { ToastContainer } from "react-toastify";
 import { loader as landingLoader } from "./pages/Landing";
 import { loader as singleProductLoader } from "./pages/SingleProduct";
 import { loader as productsLoader } from "./pages/Products";
+import { loader as checkoutLoader } from "./pages/Checkout";
+import { loader as ordersLoader } from "./pages/Orders";
 
 // actions
 import { action as loginAction } from "./pages/Login";
 import { action as registerAction } from "./pages/Register";
+import { action as checkoutAction } from "./components/ShippingInfo";
 
 // import { action as productsAction } from "./pages/Products";
 
@@ -74,10 +77,15 @@ const router = createBrowserRouter([
       {
         path: "orders",
         element: <Orders />,
+        errorElement: <ErrorElement/>,
+        loader: ordersLoader(store, queryClient)
       },
       {
         path: "checkout",
         element: <Checkout />,
+        errorElement: <ErrorElement/>,
+        loader: checkoutLoader(store),
+        action: checkoutAction(store)
       },
     ],
   },

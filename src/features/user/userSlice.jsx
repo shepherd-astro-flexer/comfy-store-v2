@@ -7,7 +7,7 @@ const getLocalStorageTheme = () => {
     return theme
 }
 
-const getLocalUser = localStorage.getItem("user") || null;
+const getLocalUser = JSON.parse(localStorage.getItem("user")) || null;
 
 const defaultState = {
    user: getLocalUser,
@@ -20,7 +20,7 @@ const userSlice = createSlice({
     reducers: {
         loginUser: (state, action) => {
             const {jwt, user} = action.payload
-            state.user = user
+            state.user = {token: jwt, ...user}
             localStorage.setItem("user", JSON.stringify(state.user))
         },
         logoutUser: (state) => {

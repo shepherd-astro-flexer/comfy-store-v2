@@ -22,16 +22,15 @@ const CartItems = () => {
       {cartItems.map((cartItem) => {
         const {
           amount,
-          optionsAmount,
-          cartItemId,
-          color,
+          cartID,
           company,
           image,
           price,
+          productColor,
           title,
         } = cartItem;
-
-        const amountArray = Array.from({ length: optionsAmount }, (_, idx) => {
+  
+        const amountArray = Array.from({ length: amount + 5}, (_, idx) => {
           const optionAmount = idx + 1;
 
           return <option key={optionAmount}>{optionAmount}</option>;
@@ -39,7 +38,7 @@ const CartItems = () => {
 
         return (
           <div
-            key={cartItemId}
+            key={cartID}
             className="flex flex-col gap-y-4 border-b first:pt-0 border-black py-6 sm:flex-row sm:justify-between last:border-none"
           >
             <img 
@@ -53,7 +52,7 @@ const CartItems = () => {
               <div className="flex items-center gap-2 pt-3">
                 <span className="text-sm">Color :</span>{" "}
                 <span
-                  style={{ backgroundColor: color }}
+                  style={{ backgroundColor: productColor }}
                   className="h-4 w-4 block rounded-full border border-black"
                 ></span>
               </div>
@@ -69,7 +68,7 @@ const CartItems = () => {
                   id="amount"
                   value={amount}
                   onChange={(e) => {
-                    handleAmount(cartItemId, parseInt(e.target.value));
+                    handleAmount(cartID, parseInt(e.target.value));
                   }}
                 >
                   {amountArray}
@@ -78,7 +77,7 @@ const CartItems = () => {
               <div>
                 <button
                   className="mt-2 text-sm text-secondary hover:underline hover:text-violet-500"
-                  onClick={() => handleRemove(cartItemId)}
+                  onClick={() => handleRemove(cartID)}
                 >
                   remove
                 </button>

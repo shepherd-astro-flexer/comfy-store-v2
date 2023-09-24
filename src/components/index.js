@@ -14,6 +14,12 @@ export {default as Pagination} from "./Pagination"
 export {default as Loading} from "./Loading"
 export {default as CartsContainer} from "./CartsContainer"
 export {default as CheckoutTotals} from "./CheckoutTotals"
+export {default as ShippingContent} from "./ShippingContent"
+export {default as OrdersContent} from "./OrdersContent"
+export {default as OrdersPagination} from "./OrdersPagination"
+
+
+
 
 
 

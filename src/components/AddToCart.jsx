@@ -13,15 +13,14 @@ const AddToCart = ({id, attributes}) => {
     const [amount, setAmount] = useState(1)
 
     const cartItem = {
-        cartItemId: id + mainColor,
-        productId: id,
-        color: mainColor,
+        cartID: id + mainColor,
+        productID: id,
+        productColor: mainColor,
         amount,
         title,
         company,
         price,
-        image,
-        optionsAmount: amount + 5
+        image
     }
 
   return (

@@ -14,9 +14,9 @@ const CartsContainer = () => {
       <div className="lg:basis-4/12">
         <CheckoutTotals />
         {user ? (
-        <Link className="btn btn-secondary btn-block" to="/checkout">proceed to checkout</Link>
+        <Link className="btn btn-secondary btn-block mt-8" to="/checkout">proceed to checkout</Link>
         ) : (
-          <Link className="btn btn-secondary btn-block" to="/login">please login</Link>
+          <Link className="btn btn-secondary btn-block mt-8" to="/login">please login</Link>
         )}
       </div>
     </div>

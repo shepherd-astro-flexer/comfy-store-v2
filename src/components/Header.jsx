@@ -7,7 +7,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user.user);
-  
+
   const logout = () => {
     navigate("/");
     dispatch(logoutUser());
