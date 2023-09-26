@@ -1,46 +1,62 @@
 import { toast } from "react-toastify"
 import { OrdersContent, OrdersPagination, SectionTitle } from "../components"
 import { customFetch } from "../utils"
-import { useLoaderData } from "react-router-dom"
-import { useQuery } from "@tanstack/react-query"
+import { redirect } from "react-router-dom"
+import { useMutation } from "@tanstack/react-query"
 
-const fetchOrderQuery = (token) => {
+const fetchOrderQuery = (pageNum, token) => {
   return {
-    queryKey: ["products", token],
+    queryKey: ["orders", pageNum + token],
     queryFn: async () => {
       try {
         const {data: {data, meta}} = await customFetch("/orders", {
           headers: {
             Authorization: `Bearer ${token}`
+          },
+          params: {
+            page: pageNum
           }
         })
-    
+        
         return {data, meta}
       } catch (error) {
-        toast.warn("Error fetching orders")
+        console.log(error);
+        toast.error(error.response.data.error.message)
+
+        if (error.response.status === 401 || 403) {
+          return redirect("/login")
+        }
+
         return error
       }
     }
   }
 }
 
-export const loader = (store, queryClient) => async () => {
+export const loader = (store, queryClient) => async ({request}) => {
   const {user} = store.getState().user
-  await queryClient.ensureQueryData(fetchOrderQuery(user.token))
-
-  return user.token
+  if (!user) {
+    toast.warn("You must be logged in to view orders")
+    return redirect("/login")
+  }
+  
+  const pageNum = Object.fromEntries(new URL(request.url).searchParams).page
+ 
+  const {data, meta} = await queryClient.ensureQueryData(fetchOrderQuery(!pageNum ? 1 : pageNum, user.token))
+  
+  return {token: user.token, pageNum: !pageNum ? 1 : pageNum, data, meta}
 }
 
 const Orders = () => {
-  const token = useLoaderData()
-  const {data} = useQuery(fetchOrderQuery(token))
+  const mutation = useMutation({
+
+  })
 
   return (
     <div>
       <SectionTitle text="Your Orders" />
-      <OrdersContent {...data} />
-      // ! pagination
-      <OrdersPagination {...data}/>
+      <OrdersContent/>
+      <OrdersPagination/>
     </div>
   )
 }

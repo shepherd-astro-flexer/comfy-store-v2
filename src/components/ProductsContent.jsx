@@ -3,8 +3,10 @@ import {PiListFill, PiGridFourFill} from "react-icons/pi"
 import ProductsList from "./ProductsList"
 import { useDispatch, useSelector } from "react-redux"
 import { layoutGrid, layoutList } from "../features/products/productsSlice"
+import { useLoaderData } from "react-router-dom"
 
-const ProductsContent = ({products, meta}) => {
+const ProductsContent = () => {
+  const {products, meta} = useLoaderData()
   const {isGrid} = useSelector((store) => store.products)
   const dispatch = useDispatch()
 

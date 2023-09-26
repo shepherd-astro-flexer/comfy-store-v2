@@ -1,6 +1,4 @@
-import { useQuery } from "@tanstack/react-query"
 import { customFetch } from "../utils"
-import { useLoaderData } from "react-router-dom"
 import { Navigations, SingleProductDetails } from "../components"
 
 const singleProductQuery = (val) => {
@@ -15,18 +13,16 @@ const singleProductQuery = (val) => {
 
 export const loader = (queryClient) => async ({params}) => {
   const id = params.id
-  await queryClient.ensureQueryData(singleProductQuery(id))
-  return id
+  const response = await queryClient.ensureQueryData(singleProductQuery(id))
+  
+  return response
 }
 
 const SingleProduct = () => {
-  const id = useLoaderData()
-  const {data: products} = useQuery(singleProductQuery(id))
-
   return (
     <div>
       <Navigations />
-      <SingleProductDetails products={products}/>
+      <SingleProductDetails/>
     </div>
   )
 }

@@ -1,8 +1,9 @@
+import { useLoaderData } from "react-router-dom";
 import { formatPrice } from "../utils";
 import AddToCart from "./AddToCart";
 
-const SingleProductDetails = ({ products }) => {
-  const { id, attributes } = products;
+const SingleProductDetails = () => {
+  const { id, attributes } = useLoaderData()
   
   const { title, company, price, description, image } =
     attributes;

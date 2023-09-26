@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Form, Link } from "react-router-dom"
+import { Form, Link, useLoaderData } from "react-router-dom"
 import { formatPrice } from "../utils";
 import { changePrice, resetPrice } from "../features/filter/filterSlice";
 import FormSelect from "./FormSelect";
 
-const Filters = ({products, meta, searchObj}) => {
+const Filters = () => {
+    const {meta, searchObj} = useLoaderData()
     const {min, max, filters: {price}} = useSelector((store) => store.filter)
     const dispatch = useDispatch()
     const {categories, companies} = meta

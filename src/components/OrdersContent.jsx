@@ -1,5 +1,8 @@
-const OrdersContent = ({ data, meta }) => {
-    console.log(meta);
+import { useLoaderData } from "react-router-dom";
+
+const OrdersContent = () => {
+  const {data, meta} = useLoaderData()
+
   return (
     <div className="mt-8">
       <h1 className="text-md capitalize mb-4">total orders : {meta.pagination.total}</h1>

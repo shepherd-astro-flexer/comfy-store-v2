@@ -5,7 +5,7 @@ import { customFetch, formatPrice } from "../utils";
 import { clearCart } from "../features/cart/cartSlice";
 import { toast } from "react-toastify";
 
-export const action = (store) => async ({request}) => {
+export const action = (store, queryClient) => async ({request}) => {
   const {fname, address} = Object.fromEntries(await request.formData())
   const {cartItems, prices} = store.getState().cart
   const {user} = store.getState().user
@@ -27,6 +27,8 @@ export const action = (store) => async ({request}) => {
         Authorization: `Bearer ${user.token}`
       }
     })
+    queryClient.removeQueries(["orders"])
+    
     console.log(response);
     store.dispatch(clearCart())
     toast.success("Order placed successfully")
@@ -34,6 +36,11 @@ export const action = (store) => async ({request}) => {
   } catch (error) {
     console.log(error);
     toast.error(error.response.data.error.message)
+
+    if (error.response.status === 401 || 403) {
+      return redirect("/login")
+    }
+
     return error
   }
 }
