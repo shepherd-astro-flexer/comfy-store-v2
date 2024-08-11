@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../features/user/userSlice";
 
 const Navbar = () => {
-  const {prices} = useSelector((store) => store.cart)
+  const { prices } = useSelector((store) => store.cart);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleTheme = () => {
-    dispatch(toggleTheme())
+    dispatch(toggleTheme());
   };
 
   return (
@@ -22,7 +22,7 @@ const Navbar = () => {
             to="/"
             className="hidden lg:flex btn btn-primary text-3xl items-center"
           >
-            GG
+            C
           </NavLink>
           {/* DROPDOWN */}
           <div className="dropdown">
